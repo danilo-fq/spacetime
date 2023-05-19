@@ -1,4 +1,6 @@
 import { User } from 'lucide-react'
+import nlwLogo from '../assets/nlw-spactetime-logo.svg'
+import Image from 'next/image'
 
 export default function Home() {
   return (
@@ -14,7 +16,7 @@ export default function Home() {
         {/* Sign In */}
         <a
           href=""
-          className="flex items-center gap-2 px-2 py-1 text-left transition-colors hover:text-gray-50"
+          className="flex items-center gap-3 px-2 py-1 text-left transition-colors hover:text-gray-50"
         >
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-400 ">
             <User className="h-5 w-5 text-gray-500 hover:text-gray-50" />
@@ -22,9 +24,27 @@ export default function Home() {
 
           <p className="max-w-[140px] text-sm leading-snug">
             <span className="underline">Crie sua conta</span> e salve suas
-            memórias
+            memórias!
           </p>
         </a>
+
+        {/* Hero */}
+        <div className="space-y-5">
+          <Image src={nlwLogo} alt="NLW Spacetime" />
+
+          <div className="max-w-[420px] space-y-1">
+            <h1 className="text-5xl font-bold leading-tight text-gray-50">
+              Sua cápsula do tempo
+            </h1>
+            <p className="text-lg leading-relaxed">
+              Colecione momentos marcantes da sua jornada e compartilhe (se
+              quiser) com o mundo
+            </p>
+          </div>
+          <button className="rounded-full bg-green-500 px-5 py-3 font-alt text-sm font-bold uppercase leading-none text-black hover:bg-green-700">
+            CADASTRAR LEMBRANÇA
+          </button>
+        </div>
       </section>
 
       {/* Right */}
