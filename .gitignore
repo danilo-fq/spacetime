@@ -30,7 +30,7 @@ web-build/
 /coverage
 
 # next.js
-web/.next/
+*/.next/
 /out/
 
 # production
