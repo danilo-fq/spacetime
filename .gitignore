@@ -30,7 +30,7 @@ web-build/
 /coverage
 
 # next.js
-/.next/
+*/.next/
 /out/
 
 # production
@@ -61,4 +61,3 @@ next-env.d.ts
 node_modules
 # Keep environment variables out of version control
 .env
-
