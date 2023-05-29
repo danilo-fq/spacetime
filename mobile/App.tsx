@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar'
 import { Text, ImageBackground, View, TouchableOpacity } from 'react-native'
+import { useEffect } from 'react'
 
 import {
   useFonts,
@@ -13,9 +14,16 @@ import blurBg from './src/assets/bg-blur.png'
 import Stripes from './src/assets/stripes.svg'
 import NLWLogo from './src/assets/nlw-spacetime-logo.svg'
 import { styled } from 'nativewind'
-import React from 'react'
+import { useAuthRequest, makeRedirectUri } from 'expo-auth-session'
 
 const StyledStripes = styled(Stripes)
+
+const discovery = {
+  authorizationEndpoint: 'https://github.com/login/oauth/authorize',
+  tokenEndpoint: 'https://github.com/login/oauth/access_token',
+  revocationEndpoint:
+    'https://github.com/settings/connections/applications/d2e7e7ac265815fb3c39',
+}
 
 export default function App() {
   const [hasLoadedFonts] = useFonts({
@@ -23,6 +31,34 @@ export default function App() {
     Roboto_700Bold,
     BaiJamjuree_700Bold,
   })
+
+  const [request, response, signInWithGithub] = useAuthRequest(
+    {
+      clientId: 'd2e7e7ac265815fb3c39',
+      scopes: ['identity'],
+      redirectUri: makeRedirectUri({
+        scheme: 'nlwspacetime',
+      }),
+    },
+    discovery,
+  )
+
+  useEffect(() => {
+    console.log(
+      makeRedirectUri({
+        scheme: 'nlwspacetime',
+      }),
+    )
+    // authorization callback URL esta mudando
+
+    console.log('quem é response: ', response)
+
+    if (response?.type === 'success') {
+      const { code } = response.params
+
+      console.log('quem é code: ', code)
+    }
+  }, [response])
 
   if (!hasLoadedFonts) return null
 
@@ -49,6 +85,7 @@ export default function App() {
         <TouchableOpacity
           activeOpacity={0.7}
           className="rounded-full bg-green-500 px-5 py-3"
+          onPress={() => signInWithGithub()}
         >
           <Text className="font-alt text-sm uppercase text-black">
             Começar a Cadastrar
